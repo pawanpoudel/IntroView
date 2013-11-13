@@ -69,15 +69,22 @@ NSString *kSimpleCellIdentifier = @"SimpleCell";
 }
 
 - (void)adjustLayoutForOrientation:(UIInterfaceOrientation)orientation {
-    if (UIInterfaceOrientationIsPortrait(orientation)) {
-        self.layout.sectionInset = UIEdgeInsetsMake(125.0, 135.0, 275.0, 135.0);
-        self.layout.minimumLineSpacing = 270.0;
-        self.layout.itemSize = CGSizeMake(500, 600);
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        if (UIInterfaceOrientationIsPortrait(orientation)) {
+            self.layout.sectionInset = UIEdgeInsetsMake(125.0, 135.0, 275.0, 135.0);
+            self.layout.minimumLineSpacing = 270.0;
+            self.layout.itemSize = CGSizeMake(500, 600);
+        }
+        else {
+            self.layout.sectionInset = UIEdgeInsetsMake(20.0, 310.0, 200.0, 310.0);
+            self.layout.minimumLineSpacing = 628.0;
+            self.layout.itemSize = CGSizeMake(400, 500);
+        }
     }
-    else {
-        self.layout.sectionInset = UIEdgeInsetsMake(20.0, 310.0, 200.0, 310.0);
-        self.layout.minimumLineSpacing = 628.0;
-        self.layout.itemSize = CGSizeMake(400, 500);
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.layout.sectionInset = UIEdgeInsetsMake(25.0, 25.0, 75.0, 35.0);
+        self.layout.minimumLineSpacing = 50.0;
+        self.layout.itemSize = CGSizeMake(270, 370);
     }
 }
 
